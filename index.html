@@ -323,6 +323,11 @@
       <h3>Semantic coverage verification</h3>
       <p class="justified">Before either sub-query is solved, a verifier checks that resolving them in order recovers the parent's intent without adding, omitting, or reordering constraints. One repair attempt is allowed; if the revised split is still inconsistent, the node is marked non-decomposable and that branch stops. Across datasets the verifier repairs 14.8&ndash;18.8% of triggered decompositions.</p>
     </div>
+
+    <figure style="margin-top:32px">
+      <img src="static/images/hiq_trace.gif" alt="Animated trace of Hi-Q on a MuSiQue question: the root query is unresolved, is split into prerequisite and dependent sub-queries, and each leaf resolves once its evidence is retrieved">
+      <figcaption><b>Illustrative trace on a MuSiQue question.</b> The tree grows only where retrieved evidence fails to resolve a query; resolved bridge entities are written into the dependent sub-queries.</figcaption>
+    </figure>
   </section>
 
   <section>
