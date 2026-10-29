@@ -244,8 +244,8 @@
 
 <div class="teaser">
   <div class="container">
-    <img src="static/images/overview.png" alt="Overview of Hi-Q: granularity control and dependency-aware binary decomposition producing a binary decomposition tree">
-    <p><b>Hi-Q</b> tests each query node against retrieved evidence, expands only the unresolved ones, and resolves prerequisites before dependents.</p>
+    <img src="static/images/hiq_trace.gif" alt="Animated trace of Hi-Q on a MuSiQue question: the root query is unresolved, is split into prerequisite and dependent sub-queries, and each leaf resolves once its evidence is retrieved">
+    <p><b>Illustrative trace on a MuSiQue question.</b> The tree grows only where retrieved evidence fails to resolve a query; resolved bridge entities are written into the dependent sub-queries.</p>
   </div>
 </div>
 
@@ -313,7 +313,14 @@
     <h2 class="title">Method</h2>
     <div class="narrow">
       <p class="justified">Hi-Q starts from the original question and attempts it at the granularity it arrives in. Only when the retrieved evidence fails to support that unit does it expand, and the expansion is ordered so that a prerequisite is resolved before whatever depends on it.</p>
+    </div>
 
+    <figure>
+      <img src="static/images/overview.png" alt="Overview of Hi-Q: granularity control and dependency-aware binary decomposition producing a binary decomposition tree">
+      <figcaption><b>Overview of Hi-Q.</b> Each query node is tested against retrieved evidence; only unresolved nodes are expanded, and prerequisites are resolved before dependents.</figcaption>
+    </figure>
+
+    <div class="narrow" style="margin-top:32px">
       <h3>Granularity control</h3>
       <p class="justified">The resolution operator rewrites the current query from the accumulated history, retrieves the top-<span class="mono">k</span> passages, and has a grounded reader answer from them. If the reader answers, the node stops. If it abstains, the retrieved evidence does not jointly support this query unit and the node becomes eligible for refinement. Writing the two error costs &mdash; expanding a node that was already answerable, stopping at one that was not &mdash; turns the decision into a threshold on the probability that the node is unresolved.</p>
 
@@ -323,11 +330,6 @@
       <h3>Semantic coverage verification</h3>
       <p class="justified">Before either sub-query is solved, a verifier checks that resolving them in order recovers the parent's intent without adding, omitting, or reordering constraints. One repair attempt is allowed; if the revised split is still inconsistent, the node is marked non-decomposable and that branch stops. Across datasets the verifier repairs 14.8&ndash;18.8% of triggered decompositions.</p>
     </div>
-
-    <figure style="margin-top:32px">
-      <img src="static/images/hiq_trace.gif" alt="Animated trace of Hi-Q on a MuSiQue question: the root query is unresolved, is split into prerequisite and dependent sub-queries, and each leaf resolves once its evidence is retrieved">
-      <figcaption><b>Illustrative trace on a MuSiQue question.</b> The tree grows only where retrieved evidence fails to resolve a query; resolved bridge entities are written into the dependent sub-queries.</figcaption>
-    </figure>
   </section>
 
   <section>
